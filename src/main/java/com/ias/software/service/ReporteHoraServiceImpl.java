@@ -1,17 +1,24 @@
 package com.ias.software.service;
 
+import com.ias.software.dto.ReporteHoraDto;
 import com.ias.software.entity.ReporteHora;
+import com.ias.software.exceptions.ReporteException;
 import com.ias.software.repository.ReporteHoraRepository;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.lang.reflect.Type;
 import java.util.List;
+
 
 @Service
 public class ReporteHoraServiceImpl implements ReporteHoraService{
 
-    private ReporteHoraRepository reporteHoraRepository;
+    private final ReporteHoraRepository reporteHoraRepository;
 
     @Autowired
     public ReporteHoraServiceImpl(ReporteHoraRepository reporteHoraRepository) {
@@ -21,7 +28,12 @@ public class ReporteHoraServiceImpl implements ReporteHoraService{
     @Override
     @Transactional
     public ReporteHora save(ReporteHora reporteHora) {
-        return reporteHoraRepository.save(reporteHora);
+        if(!reporteHora.getHoraInicio().before(reporteHora.getHoraFinal())){
+            throw new ReporteException("La hora inicial debe ser mayor");
+        }
+
+        return reporteHoraRepository.save(reporteHora
+        );
     }
 
     @Override
@@ -32,7 +44,18 @@ public class ReporteHoraServiceImpl implements ReporteHoraService{
 
     @Override
     public List<ReporteHora> findByHoras(String idTecnico) {
-        return reporteHoraRepository.findByHoras(idTecnico);
+        List<ReporteHora> lista1 = reporteHoraRepository.findByHoras(idTecnico);
+        return lista1;
+    }
+
+    @Override
+    public List<ReporteHoraDto> convertEntityToDTOList(String idTecnico) {
+        ModelMapper modelMapper = new ModelMapper();
+        List<ReporteHora> lista1 = reporteHoraRepository.findByHoras(idTecnico);
+        Type listType = new TypeToken<List<ReporteHoraDto>>(){}.getType();
+        List<ReporteHoraDto> dtoList = modelMapper.map(lista1, listType);
+
+        return dtoList;
     }
 
 

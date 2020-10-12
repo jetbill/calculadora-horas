@@ -1,8 +1,10 @@
 package com.ias.software.service.calculator;
 
+import com.ias.software.dto.ReporteHoraDto;
 import com.ias.software.entity.ReporteHora;
 import com.ias.software.repository.ReporteHoraRepository;
 import com.ias.software.util.ConvertDates;
+import com.ias.software.util.LocalDateTimeConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -87,7 +89,8 @@ public class CalcularHorasServiceImp implements CalcularHorasService{
 
 
     @Override
-    public Hora horasTrabajadas(int diaSemana, List<ReporteHora> reportehora) {
+    public Hora horasTrabajadas(int diaSemana, List<ReporteHoraDto> reportehora) {
+
 
 
         LocalDateTime firstDay = LocalDateTime.now()
@@ -98,7 +101,7 @@ public class CalcularHorasServiceImp implements CalcularHorasService{
                 .with(IsoFields.WEEK_OF_WEEK_BASED_YEAR, diaSemana)
                 .with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
         Hora hora = new Hora();
-        for (ReporteHora reporteHora : reportehora) {
+        for (ReporteHoraDto reporteHora : reportehora) {
             if (ConvertDates.convertToLocalDateTime(reporteHora.getHoraInicio()).isAfter(firstDay)
                     && ConvertDates.convertToLocalDateTime(reporteHora.getHoraInicio()).isAfter(firstDay)
                     && ConvertDates.convertToLocalDateTime(reporteHora.getHoraFinal()).isAfter(lastDay)

@@ -5,7 +5,10 @@ package com.ias.software.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -22,22 +25,28 @@ public class ReporteHora implements Serializable {
     @Column(name = "codigo_servicio")
     private String codigoServicio;
 
+    @NotNull(message = "debe ingesar una fecha")
     @Column(name = "hora_inicio")
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date horaInicio;
 
+    @NotNull(message = "debe ingesar una fecha")
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Column(name = "hora_final")
     private Date horaFinal;
 
+
+    /*public ReporteHora(Date horaInicio, Date horaFinal) {
+        this.horaInicio = horaInicio;
+        this.horaFinal = horaFinal;
+    }*/
 
     public ReporteHora(Date horaInicio, Date horaFinal) {
         this.horaInicio = horaInicio;
         this.horaFinal = horaFinal;
     }
-
 
     public ReporteHora() {
     }
@@ -65,6 +74,7 @@ public class ReporteHora implements Serializable {
     public void setCodigoServicio(String codigoServicio) {
         this.codigoServicio = codigoServicio;
     }
+
 
     public Date getHoraInicio() {
         return horaInicio;

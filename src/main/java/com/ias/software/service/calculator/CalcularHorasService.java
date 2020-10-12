@@ -1,5 +1,6 @@
 package com.ias.software.service.calculator;
 
+import com.ias.software.dto.ReporteHoraDto;
 import com.ias.software.entity.ReporteHora;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,6 @@ public interface CalcularHorasService {
     long calcularHorasNormalesExtra(LocalDateTime horaInicio, LocalDateTime horaFin, int horasTotales);
     long calcularHorasNocturnasEstra(LocalDateTime horaInicio, LocalDateTime horaFin, int horasTotales);
     long calcularHorasDominicalesExtra(LocalDateTime horaInicio, LocalDateTime horaFin, int horasTotales);
-    Hora horasTrabajadas(int diaSemana,List<ReporteHora> reportehora);
+    Hora horasTrabajadas(int diaSemana,List<ReporteHoraDto> reportehora);
 
 }

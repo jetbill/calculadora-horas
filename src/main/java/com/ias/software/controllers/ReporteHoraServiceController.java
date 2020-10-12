@@ -1,10 +1,12 @@
 package com.ias.software.controllers;
 
+import com.ias.software.dto.ReporteHoraDto;
 import com.ias.software.entity.ReporteHora;
 import com.ias.software.exceptions.ReporteException;
 import com.ias.software.service.ReporteHoraService;
 import com.ias.software.service.calculator.CalcularHorasService;
 import com.ias.software.service.calculator.Hora;
+import com.ias.software.util.ConvertDates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/v1/reporte")
 public class ReporteHoraServiceController {
 
@@ -71,6 +74,8 @@ public class ReporteHoraServiceController {
         Map<String,Object> response = new HashMap<>();
         try {
             reporteHoras = reporteHoraService.findByHoras(codigoTecnico);
+
+
                     logger.info("horas",reporteHoras);
 
 
@@ -86,12 +91,16 @@ public class ReporteHoraServiceController {
        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
-    @GetMapping("/calculo/{codigo}/{numeroSemana}")
+    @GetMapping("/codigo/{codigo}/semana/{numeroSemana}")
     public ResponseEntity<?> calcularHora(@PathVariable String codigo,@PathVariable int numeroSemana){
         Map<String,Object> response = new HashMap<>();
         Hora hora = null;
-        List<ReporteHora> reporteHoras = reporteHoraService.findByHoras(codigo);
+        List<ReporteHoraDto> reporteHoras = null;
+        List<ReporteHoraDto> reporteHoras2 = null;
+
+
         try {
+            reporteHoras  = reporteHoraService.convertEntityToDTOList(codigo);
             hora = horasService.horasTrabajadas(numeroSemana, reporteHoras);
 
         }catch (DataAccessException e){
