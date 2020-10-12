@@ -7,6 +7,7 @@ import com.ias.software.service.ReporteHoraService;
 import com.ias.software.service.calculator.CalcularHorasService;
 import com.ias.software.service.calculator.Hora;
 import com.ias.software.util.ConvertDates;
+import com.ias.software.util.FormatDates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,12 +97,13 @@ public class ReporteHoraServiceController {
         Map<String,Object> response = new HashMap<>();
         Hora hora = null;
         List<ReporteHoraDto> reporteHoras = null;
-        List<ReporteHoraDto> reporteHoras2 = null;
+        //List<ReporteHoraDto> reporteHoras2 = null;
 
 
         try {
             reporteHoras  = reporteHoraService.convertEntityToDTOList(codigo);
-            hora = horasService.horasTrabajadas(numeroSemana, reporteHoras);
+            List<ReporteHoraDto> reporteHoraDtosFormated = FormatDates.formatList(reporteHoras);
+            hora = horasService.horasTrabajadas(numeroSemana, reporteHoraDtosFormated);
 
         }catch (DataAccessException e){
             response.put("mensaje","Error de operacion");

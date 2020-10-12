@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.IsoFields;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
@@ -90,6 +91,9 @@ public class CalcularHorasServiceImp implements CalcularHorasService{
 
     @Override
     public Hora horasTrabajadas(int diaSemana, List<ReporteHoraDto> reportehora) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+
 
 
 

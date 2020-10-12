@@ -28,12 +28,12 @@ public class ReporteHora implements Serializable {
     @NotNull(message = "debe ingesar una fecha")
     @Column(name = "hora_inicio")
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     private Date horaInicio;
 
     @NotNull(message = "debe ingesar una fecha")
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     @Column(name = "hora_final")
     private Date horaFinal;
 
