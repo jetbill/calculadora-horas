@@ -91,11 +91,6 @@ public class CalcularHorasServiceImp implements CalcularHorasService{
 
     @Override
     public Hora horasTrabajadas(int diaSemana, List<ReporteHoraDto> reportehora) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-
-
-
 
         LocalDateTime firstDay = LocalDateTime.now()
                 .with(IsoFields.WEEK_OF_WEEK_BASED_YEAR, diaSemana)

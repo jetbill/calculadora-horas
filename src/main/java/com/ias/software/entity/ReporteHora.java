@@ -5,6 +5,7 @@ package com.ias.software.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -18,10 +19,10 @@ public class ReporteHora implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @NotNull(message = "debe ingresar un codigo")
     @Column(name = "codigo_tecnico")
     private String codigoTecnico;
-
+    @NotNull(message = "debe ingresar un codigo")
     @Column(name = "codigo_servicio")
     private String codigoServicio;
 
@@ -38,10 +39,12 @@ public class ReporteHora implements Serializable {
     private Date horaFinal;
 
 
-    /*public ReporteHora(Date horaInicio, Date horaFinal) {
+    public ReporteHora(String codigoTecnico, String codigoServicio, Date horaInicio, Date horaFinal) {
+        this.codigoTecnico = codigoTecnico;
+        this.codigoServicio = codigoServicio;
         this.horaInicio = horaInicio;
         this.horaFinal = horaFinal;
-    }*/
+    }
 
     public ReporteHora(Date horaInicio, Date horaFinal) {
         this.horaInicio = horaInicio;

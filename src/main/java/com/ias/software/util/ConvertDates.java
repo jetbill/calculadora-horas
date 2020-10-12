@@ -1,5 +1,7 @@
 package com.ias.software.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -28,6 +30,20 @@ public class ConvertDates {
         return java.util.Date
                 .from(localDateTime.atZone(ZoneId.systemDefault())
                         .toInstant());
+
+    }
+
+    public static Date convertToString(String date){
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(date);
+        }
+        catch (ParseException ex)
+        {
+            System.out.println(ex);
+        }
+        return fechaDate;
 
     }
 

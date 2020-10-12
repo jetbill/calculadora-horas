@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -29,7 +30,7 @@ public class ReporteHoraServiceImpl implements ReporteHoraService{
     @Transactional
     public ReporteHora save(ReporteHora reporteHora) {
         if(!reporteHora.getHoraInicio().before(reporteHora.getHoraFinal())){
-            throw new ReporteException("La hora inicial debe ser mayor");
+            throw new ReporteException("La hora inicial debe ser menor");
         }
 
         return reporteHoraRepository.save(reporteHora
@@ -56,6 +57,11 @@ public class ReporteHoraServiceImpl implements ReporteHoraService{
         List<ReporteHoraDto> dtoList = modelMapper.map(lista1, listType);
 
         return dtoList;
+    }
+
+    @Override
+    public Optional<ReporteHora> findByCodigoTecnico(String codigoTecnico) {
+        return reporteHoraRepository.findByCodigoTecnico(codigoTecnico);
     }
 
 
