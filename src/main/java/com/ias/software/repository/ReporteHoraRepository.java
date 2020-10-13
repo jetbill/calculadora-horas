@@ -14,6 +14,6 @@ public interface ReporteHoraRepository extends
     @Query("SELECT h FROM ReporteHora h WHERE h.codigoTecnico= :codigoTecnico")
     List<ReporteHora> findByHoras(String codigoTecnico);
 
-    @Query("SELECT c FROM ReporteHora c WHERE h.codigoTecnico= :codigoTecnico")
+    @Query("SELECT c FROM ReporteHora c WHERE c.codigoTecnico= :codigoTecnico")
     Optional<ReporteHora> findByCodigoTecnico(String codigoTecnico);
 }

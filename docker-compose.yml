@@ -5,10 +5,10 @@ services:
     image: mysql:latest
     container_name: mysql-standalone
     environment:
-      - MYSQL_ROOT_PASSWORD=admin123
+      - MYSQL_ROOT_PASSWORD=key3165880
       - MYSQL_DATABASE=registrohoras
       - MYSQL_USER=jetbill
-      - MYSQL_PASSWORD=admin123
+      - MYSQL_PASSWORD=key3165880
   springboot-docker-container:
     image: springboot-docker-container
     container_name: springboot-docker-container
