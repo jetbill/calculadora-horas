@@ -37,8 +37,8 @@ public class ReporteHoraServiceController {
         this.reporteHoraService = reporteHoraService;
     }
 
-    @GetMapping
-    public ResponseEntity<?> findAll(){
+    /*@GetMapping
+   public ResponseEntity<?> findAll(){
         Iterable<ReporteHora> reportes = null;
         Map<String,Object> response = new HashMap<>();
         try {
@@ -51,6 +51,10 @@ public class ReporteHoraServiceController {
         }
         response.put("reportes",reportes);
         return new ResponseEntity<>(response,HttpStatus.OK);
+    }*/
+    @GetMapping
+    public ResponseEntity<?> findAll(){
+        return ResponseEntity.ok().body(reporteHoraService.findAll());
     }
 
     @PostMapping
@@ -97,9 +101,7 @@ public class ReporteHoraServiceController {
         Map<String,Object> response = new HashMap<>();
         Hora hora = null;
         List<ReporteHoraDto> reporteHoras = null;
-        //List<ReporteHoraDto> reporteHoras2 = null;
-
-
+        
         try {
             reporteHoras  = reporteHoraService.convertEntityToDTOList(codigo);
             List<ReporteHoraDto> reporteHoraDtosFormated = FormatDates.formatList(reporteHoras);
@@ -111,9 +113,9 @@ public class ReporteHoraServiceController {
             return new ResponseEntity<Map<String,Object>>(response,HttpStatus.NOT_FOUND);
 
         }
-        response.put("reporte",hora);
 
-        return new ResponseEntity<>(response,HttpStatus.OK);
+
+         return ResponseEntity.ok().body(hora);
     }
 
 }
