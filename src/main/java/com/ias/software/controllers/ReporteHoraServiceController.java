@@ -97,11 +97,12 @@ public class ReporteHoraServiceController {
     }
 
     @GetMapping("/codigo/{codigo}/semana/{numeroSemana}")
-    public ResponseEntity<?> calcularHora(@PathVariable String codigo,@PathVariable int numeroSemana){
+    public ResponseEntity<?> calcularHora(@PathVariable("codigo") String codigo,
+                                          @PathVariable("numeroSemana") int numeroSemana){
         Map<String,Object> response = new HashMap<>();
         Hora hora = null;
         List<ReporteHoraDto> reporteHoras = null;
-        
+
         try {
             reporteHoras  = reporteHoraService.convertEntityToDTOList(codigo);
             List<ReporteHoraDto> reporteHoraDtosFormated = FormatDates.formatList(reporteHoras);
