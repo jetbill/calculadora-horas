@@ -8,32 +8,32 @@ import java.util.Date;
 
 public class ReporteHoraDto {
 
-    private Date horaInicio;
-    private Date horaFinal;
+    private LocalDateTime horaInicio;
+    private LocalDateTime horaFinal;
 
     public ReporteHoraDto() {
     }
 
-   public ReporteHoraDto(Date horaInicio, Date horaFinal) {
+   public ReporteHoraDto(LocalDateTime horaInicio, LocalDateTime horaFinal) {
         this.horaInicio = horaInicio;
         this.horaFinal = horaFinal;
     }
 
 
 
-    public Date getHoraInicio() {
+    public LocalDateTime getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Date horaInicio) {
+    public void setHoraInicio(LocalDateTime horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public Date getHoraFinal() {
+    public LocalDateTime getHoraFinal() {
         return horaFinal;
     }
 
-    public void setHoraFinal(Date horaFinal) {
+    public void setHoraFinal(LocalDateTime horaFinal) {
         this.horaFinal = horaFinal;
     }
 }

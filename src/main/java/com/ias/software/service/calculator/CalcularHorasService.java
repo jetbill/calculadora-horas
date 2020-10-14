@@ -14,6 +14,6 @@ public interface CalcularHorasService {
     long calcularHorasNormalesExtra(LocalDateTime horaInicio, LocalDateTime horaFin, int horasTotales);
     long calcularHorasNocturnasEstra(LocalDateTime horaInicio, LocalDateTime horaFin, int horasTotales);
     long calcularHorasDominicalesExtra(LocalDateTime horaInicio, LocalDateTime horaFin, int horasTotales);
-    Hora horasTrabajadas(int diaSemana,List<ReporteHoraDto> reportehora);
+
 
 }

@@ -1,9 +1,10 @@
-package com.ias.software.service;
+package com.ias.software.service.reporteHoras;
 
 import com.ias.software.dto.ReporteHoraDto;
 import com.ias.software.entity.ReporteHora;
 import com.ias.software.exceptions.ReporteException;
 import com.ias.software.repository.ReporteHoraRepository;
+import com.ias.software.service.reporteHoras.ReporteHoraService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.util.Optional;
 
 
 @Service
-public class ReporteHoraServiceImpl implements ReporteHoraService{
+public class ReporteHoraServiceImpl implements ReporteHoraService {
 
     private final ReporteHoraRepository reporteHoraRepository;
 
@@ -29,7 +30,7 @@ public class ReporteHoraServiceImpl implements ReporteHoraService{
     @Override
     @Transactional
     public ReporteHora save(ReporteHora reporteHora) {
-        if(!reporteHora.getHoraInicio().before(reporteHora.getHoraFinal())){
+        if(!reporteHora.getHoraInicio().isBefore(reporteHora.getHoraFinal())){
             throw new ReporteException("La hora inicial debe ser menor");
         }
 

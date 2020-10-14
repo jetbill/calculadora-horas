@@ -2,12 +2,10 @@ package com.ias.software.controllers;
 
 import com.ias.software.dto.ReporteHoraDto;
 import com.ias.software.entity.ReporteHora;
-import com.ias.software.exceptions.ReporteException;
-import com.ias.software.service.ReporteHoraService;
+import com.ias.software.service.reporteHoras.ReporteHoraService;
 import com.ias.software.service.calculator.CalcularHorasService;
+import com.ias.software.service.calculator.DevolverHoras;
 import com.ias.software.service.calculator.Hora;
-import com.ias.software.util.ConvertDates;
-import com.ias.software.util.FormatDates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin
@@ -105,8 +101,7 @@ public class ReporteHoraServiceController {
 
         try {
             reporteHoras  = reporteHoraService.convertEntityToDTOList(codigo);
-            List<ReporteHoraDto> reporteHoraDtosFormated = FormatDates.formatList(reporteHoras);
-            hora = horasService.horasTrabajadas(numeroSemana, reporteHoraDtosFormated);
+            hora = DevolverHoras.horasTrabajadas(numeroSemana, reporteHoras);
 
         }catch (DataAccessException e){
             response.put("mensaje","Error de operacion");

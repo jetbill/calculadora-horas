@@ -27,26 +27,26 @@ public class ReporteHora implements Serializable {
     private String codigoServicio;
 
     @NotNull(message = "debe ingesar una fecha")
-    @Column(name = "hora_inicio")
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
-    private Date horaInicio;
+    //@Column(name = "hora_inicio")
+    //@Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime horaInicio;
 
     @NotNull(message = "debe ingesar una fecha")
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
-    @Column(name = "hora_final")
-    private Date horaFinal;
+   // @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    //@Column(name = "hora_final")
+    private LocalDateTime horaFinal;
 
 
-    public ReporteHora(String codigoTecnico, String codigoServicio, Date horaInicio, Date horaFinal) {
+    public ReporteHora(String codigoTecnico, String codigoServicio, LocalDateTime horaInicio, LocalDateTime horaFinal) {
         this.codigoTecnico = codigoTecnico;
         this.codigoServicio = codigoServicio;
         this.horaInicio = horaInicio;
         this.horaFinal = horaFinal;
     }
 
-    public ReporteHora(Date horaInicio, Date horaFinal) {
+    public ReporteHora(LocalDateTime horaInicio, LocalDateTime horaFinal) {
         this.horaInicio = horaInicio;
         this.horaFinal = horaFinal;
     }
@@ -79,19 +79,19 @@ public class ReporteHora implements Serializable {
     }
 
 
-    public Date getHoraInicio() {
+    public LocalDateTime getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Date horaInicio) {
+    public void setHoraInicio(LocalDateTime horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public Date getHoraFinal() {
+    public LocalDateTime getHoraFinal() {
         return horaFinal;
     }
 
-    public void setHoraFinal(Date horaFinal) {
+    public void setHoraFinal(LocalDateTime horaFinal) {
         this.horaFinal = horaFinal;
     }
 

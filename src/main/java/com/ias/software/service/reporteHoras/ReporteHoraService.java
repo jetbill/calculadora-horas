@@ -1,4 +1,4 @@
-package com.ias.software.service;
+package com.ias.software.service.reporteHoras;
 
 import com.ias.software.dto.ReporteHoraDto;
 import com.ias.software.entity.ReporteHora;
