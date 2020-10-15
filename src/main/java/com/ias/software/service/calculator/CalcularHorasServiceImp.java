@@ -44,17 +44,21 @@ public class CalcularHorasServiceImp implements CalcularHorasService {
     @Override
     public long calcularHorasNocturnas(LocalDateTime horaInicio, LocalDateTime horaFin) {
         if (horaInicio.getDayOfWeek().getValue() == 7) return 0;
+        LocalDateTime nocturna=null;
 
         LocalDateTime inicioHoraLaboral = LocalDateTime.of(horaInicio.getYear(),
                 horaInicio.getMonth(), horaInicio.getDayOfMonth(), 20, 0);
+
         LocalDateTime finHoraLaboral = LocalDateTime.of(horaInicio.getYear(),
                 horaInicio.getMonth(), horaInicio.getDayOfMonth(), 6, 59);
-        finHoraLaboral.plusDays(1);
 
-        if (horaInicio.isAfter(inicioHoraLaboral)) horaInicio = inicioHoraLaboral;
-        if (horaFin.isBefore(finHoraLaboral)) horaFin = finHoraLaboral;
 
-        return (Math.abs(Duration.between(horaInicio, horaFin).getSeconds()) / 3600);
+        if (finHoraLaboral.isBefore(inicioHoraLaboral)) {
+            nocturna = finHoraLaboral.minusHours(20).plusDays(1);
+        }
+
+
+        return (Math.abs(nocturna.getSecond())/3600);
     }
 
     @Override
